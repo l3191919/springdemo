@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyz.dao.PaymentDao">
+
+    <resultMap id="BaseResultMap" type="com.lyz.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="serial" property="serial" jdbcType="VARCHAR"/>
+        <id column="company_id" property="companyId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="create" parameterType="com.lyz.entities.Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment (serial) values (#{serial});
+    </insert>
+
+
+    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+        select * from payment where id = #{id};
+    </select>
+
+    <select id="getPaymentByCompanyId" parameterType="Long" resultMap="BaseResultMap">
+        select * from payment where company_id = #{companyId}
+    </select>
+
+    <select id="getPaymentByOr" parameterType="java.util.Map"  resultMap="BaseResultMap">
+        select * from payment where company_id = #{map.companyId1}
+         union
+        select * from payment where company_id = #{map.companyId2}
+    </select>
+
+</mapper>
