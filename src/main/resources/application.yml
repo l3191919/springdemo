@@ -43,13 +43,13 @@ xxl:
       logretentiondays: 3
 
 
-eureka:
-  client:
-    # Eureka服务注册中心会将自己作为客户端来尝试注册它自己，必須禁止
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://eureka7001.com:7001/eureka
+#eureka:
+#  client:
+#    # Eureka服务注册中心会将自己作为客户端来尝试注册它自己，必須禁止
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://eureka7001.com:7001/eureka
 #      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka
 
   #instance:

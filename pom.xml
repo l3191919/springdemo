@@ -55,11 +55,11 @@
 			<scope>import</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-<!--		<artifactId>spring-cloud-starter-eureka-client</artifactId>-->
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--&lt;!&ndash;		<artifactId>spring-cloud-starter-eureka-client</artifactId>&ndash;&gt;-->
+<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--		</dependency>-->
 
 		<!--监控-->
 		<dependency>
