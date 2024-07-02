@@ -42,15 +42,15 @@ public class PaymentController {
      * @param payment
      * @return
      */
-//    @PostMapping(value = "payment/create")
-//    public CommonResult create(@RequestBody Payment payment) {
-//        int result = paymentService.create(payment);
-//        log.info("*****插入结果: " + result);
-//        if (result > 0) {
-//            return new CommonResult(200, "插入数据库成功,serverPort:" + serverPost,result);
-//        }
-//        return new CommonResult(444, "插入数据库失败", null);
-//    }
+    @PostMapping(value = "payment/create")
+    public CommonResult create(@RequestBody Payment payment) {
+        int result = paymentService.create(payment);
+        log.info("*****插入结果: " + result);
+        if (result > 0) {
+            return new CommonResult(200, "插入数据库成功,serverPort:" + serverPost,result);
+        }
+        return new CommonResult(444, "插入数据库失败", null);
+    }
 
     /**
      * 查询
@@ -78,15 +78,15 @@ public class PaymentController {
         return new CommonResult(444, "没有对应记录,查询ID:" + companyId, null);
     }
 
-//    @PostMapping(value = "payment/getPaymentByOr")
-//    public CommonResult getPaymentByOr(@RequestBody HashMap<String,String> map) {
-//        IPage<Payment> payment = paymentService.getPaymentByOr(map);
-//        log.info("*****查询结果: " + payment);
-//        if (payment != null) {
-//            return new CommonResult(200, "查询成功,serverPort:" + serverPost,payment);
-//        }
-//        return new CommonResult(444, "没有对应记录,查询ID:" + JSON.toJSONString(map), null);
-//    }
+    @PostMapping(value = "payment/getPaymentByOr")
+    public CommonResult getPaymentByOr(@RequestBody HashMap<String,String> map) {
+        IPage<Payment> payment = paymentService.getPaymentByOr(map);
+        log.info("*****查询结果: " + payment);
+        if (payment != null) {
+            return new CommonResult(200, "查询成功,serverPort:" + serverPost,payment);
+        }
+        return new CommonResult(444, "没有对应记录,查询ID:" + JSON.toJSONString(map), null);
+    }
 
 //    @GetMapping("patment/discovery")
 //    public Object getDiscoveryClient() {
