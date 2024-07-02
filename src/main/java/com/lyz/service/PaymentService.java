@@ -11,7 +11,7 @@ import java.util.HashMap;
 public interface PaymentService {
     public int create(Payment payment);
 
-    public  Payment getPaymentById(Long id);
+    public Payment getPaymentById(Long id);
     public  Payment getThreadPaymentById(Long id);
     public IPage<Payment> getPaymentByCompanyId(Long companyId);
     public IPage<Payment> getPaymentByOr(HashMap<String, String> map);

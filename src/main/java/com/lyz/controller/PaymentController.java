@@ -1,6 +1,7 @@
 package com.lyz.controller;
 
 import com.alibaba.fastjson.JSON;
+
 import com.lyz.entities.CommonResult;
 import com.lyz.entities.Payment;
 import com.lyz.entities.Person;
@@ -26,11 +27,11 @@ import java.util.concurrent.TimeUnit;
 public class PaymentController {
 
     @Value("${server.port}")
-    private String serverPost;
+    String serverPost;
 
-    @Resource
-    private PaymentService paymentService;
-    @Resource
+    @Autowired
+    PaymentService paymentService;
+    //@Resource
     //private DiscoveryClient discoveryClient;
 
 
@@ -41,15 +42,15 @@ public class PaymentController {
      * @param payment
      * @return
      */
-    @PostMapping(value = "payment/create")
-    public CommonResult create(@RequestBody Payment payment) {
-        int result = paymentService.create(payment);
-        log.info("*****插入结果: " + result);
-        if (result > 0) {
-            return new CommonResult(200, "插入数据库成功,serverPort:" + serverPost,result);
-        }
-        return new CommonResult(444, "插入数据库失败", null);
-    }
+//    @PostMapping(value = "payment/create")
+//    public CommonResult create(@RequestBody Payment payment) {
+//        int result = paymentService.create(payment);
+//        log.info("*****插入结果: " + result);
+//        if (result > 0) {
+//            return new CommonResult(200, "插入数据库成功,serverPort:" + serverPost,result);
+//        }
+//        return new CommonResult(444, "插入数据库失败", null);
+//    }
 
     /**
      * 查询
@@ -59,7 +60,7 @@ public class PaymentController {
      * @return
      */
     @GetMapping(value = "payment/get/{id}")
-    public CommonResult getPaymentById(@PathVariable("id") Long id) {
+    public CommonResult getPaymentById(@PathVariable Long id) {
         Payment payment = paymentService.getPaymentById(id);
         log.info("*****查询结果: " + payment);
         if (payment != null) {
@@ -68,7 +69,7 @@ public class PaymentController {
         return new CommonResult(444, "没有对应记录,查询ID:" + id, null);
     }
     @GetMapping(value = "payment/byCompany/{companyId}")
-    public CommonResult getPaymentByCompanyId(@PathVariable("companyId") Long companyId) {
+    public CommonResult getPaymentByCompanyId(@PathVariable Long companyId) {
         IPage<Payment> payment = paymentService.getPaymentByCompanyId(companyId);
         log.info("*****查询结果: " + payment);
         if (payment != null) {
@@ -77,15 +78,15 @@ public class PaymentController {
         return new CommonResult(444, "没有对应记录,查询ID:" + companyId, null);
     }
 
-    @PostMapping(value = "payment/getPaymentByOr")
-    public CommonResult getPaymentByOr(@RequestBody HashMap<String,String> map) {
-        IPage<Payment> payment = paymentService.getPaymentByOr(map);
-        log.info("*****查询结果: " + payment);
-        if (payment != null) {
-            return new CommonResult(200, "查询成功,serverPort:" + serverPost,payment);
-        }
-        return new CommonResult(444, "没有对应记录,查询ID:" + JSON.toJSONString(map), null);
-    }
+//    @PostMapping(value = "payment/getPaymentByOr")
+//    public CommonResult getPaymentByOr(@RequestBody HashMap<String,String> map) {
+//        IPage<Payment> payment = paymentService.getPaymentByOr(map);
+//        log.info("*****查询结果: " + payment);
+//        if (payment != null) {
+//            return new CommonResult(200, "查询成功,serverPort:" + serverPost,payment);
+//        }
+//        return new CommonResult(444, "没有对应记录,查询ID:" + JSON.toJSONString(map), null);
+//    }
 
 //    @GetMapping("patment/discovery")
 //    public Object getDiscoveryClient() {
@@ -117,10 +118,10 @@ public class PaymentController {
         return serverPost;
     }
 
-    @PostMapping(value = "payment/getPerson")
-    public  void  getPerson(@RequestBody Person person){
-        log.info("getPerson:{}",JSON.toJSONString(person));
-    }
+//    @PostMapping(value = "payment/getPerson")
+//    public  void  getPerson(@RequestBody Person person){
+//        log.info("getPerson:{}",JSON.toJSONString(person));
+//    }
 
     public void getMethod(){
 
