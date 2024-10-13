@@ -1,9 +1,16 @@
 package com.lyz;
 
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+import com.lyz.controller.PaymentController1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -12,6 +19,7 @@ public class PaymentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PaymentApplication.class, args);
+
 //		int i = 0;
 //		while (true){
 //			try {
@@ -31,6 +39,7 @@ public class PaymentApplication {
 //			list.add(u);
 //		}
 	}
+
 
 }
 

@@ -1,4 +1,4 @@
-package com.lyz.alibaba.invest;
+package com.lyz.alibaba.pattern.zerenlian;
 
 import org.springframework.stereotype.Component;
 

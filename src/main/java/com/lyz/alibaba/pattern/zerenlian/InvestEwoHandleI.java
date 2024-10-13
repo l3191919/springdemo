@@ -1,4 +1,4 @@
-package com.lyz.alibaba.invest;
+package com.lyz.alibaba.pattern.zerenlian;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 //@Component
     @Slf4j
-public class InvestEwoHandleI extends AbstractInvestHandle{
+public class InvestEwoHandleI extends AbstractInvestHandle {
 
     public InvestEwoHandleI(String type){
         this.type = type;

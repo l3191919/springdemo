@@ -3,29 +3,111 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lyz.dao.PaymentDao">
 
-    <resultMap id="BaseResultMap" type="com.lyz.entities.Payment">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <id column="serial" property="serial" jdbcType="VARCHAR"/>
-        <id column="company_id" property="companyId" jdbcType="BIGINT"/>
+    <resultMap id="PaymentItemResultMap" type="com.lyz.entities.PaymentItem">
+        <id column="id" property="paymentId1" jdbcType="BIGINT"/>
+        <result  column="serial" property="serial" jdbcType="VARCHAR"/>
+        <result  column="company_id" property="companyId1" jdbcType="BIGINT"/>
+        <result  column="moneey" property="moneey" jdbcType="DECIMAL"/>
+        <collection  property="companies"   ofType="com.lyz.entities.Company">
+            <result column="id" property="companyId" jdbcType="BIGINT"/>
+            <result  column="company_name" property="companyName" jdbcType="VARCHAR"/>
+            <result  column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+            <result  column="payment_id" property="paymentId" jdbcType="BIGINT"/>
+        </collection>
+
     </resultMap>
+
+
+    <resultMap id="CompanyResultMap" type="com.lyz.entities.Company">
+        <id column="id" property="companyId" jdbcType="BIGINT"/>
+        <result  column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result  column="company_code" property="companyCode" jdbcType="VARCHAR"/>
+        <result  column="payment_id" property="paymentId" jdbcType="BIGINT"/>
+    </resultMap>
+
+
+   <select id="selectPaymentItemById" parameterType="Long" resultMap="PaymentItemResultMap">
+        select p.id paymentId1,
+        p.serial ,
+        p.company_id companyId1,
+        p.moneey ,
+
+        c.id companyId,
+        c.company_name companyName,
+        c.company_code companyCode,
+        c.payment_id paymentId
+        from payment p LEFT join company c ON p.company_id = c.payment_id where p.id = #{id}
+    </select>
+
+
+    <resultMap id="PaymentResultMap" type="com.lyz.entities.Payment">
+        <id column="id" property="paymentId" jdbcType="BIGINT"/>
+        <result  column="serial" property="serial" jdbcType="VARCHAR"/>
+        <result  column="company_id" property="companyId" jdbcType="BIGINT"/>
+        <result  column="moneey" property="moneey" jdbcType="DECIMAL"/>
+    </resultMap>
+
+
+
+
 
     <insert id="create" parameterType="com.lyz.entities.Payment" useGeneratedKeys="true" keyProperty="id">
         insert into payment (serial) values (#{serial});
     </insert>
 
 
-    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+    <select id="getPaymentById" parameterType="Long" resultMap="PaymentResultMap">
         select * from payment where id = #{id};
     </select>
 
-    <select id="getPaymentByCompanyId" parameterType="Long" resultMap="BaseResultMap">
+    <select id="getPaymentByCompanyId" parameterType="Long" resultMap="PaymentResultMap">
         select * from payment where company_id = #{companyId}
     </select>
 
-    <select id="getPaymentByOr" parameterType="java.util.Map"  resultMap="BaseResultMap">
+    <select id="getPaymentByOr" parameterType="java.util.Map"  resultMap="PaymentResultMap">
         select * from payment where company_id = #{map.companyId1}
          union
         select * from payment where company_id = #{map.companyId2}
     </select>
+
+
+        <insert id="insertBatch" parameterType="java.util.List">
+            INSERT INTO payment (serial,company_id,moneey)
+            VALUES
+            <foreach collection="list" item="payment" index="index" separator=",">
+                (#{payment.serial}, #{payment.companyId}, #{payment.moneey})
+            </foreach>
+        </insert>
+
+
+    <select id="selectById" parameterType="Long" resultMap="PaymentResultMap">
+        select * from payment where id = #{id}
+    </select>
+
+    <delete id="d1" parameterType="Long">
+        delete * from payment where id = #{id}
+    </delete>
+
+    <insert id="insertPayment" parameterType="com.lyz.entities.Payment">
+        insert into payment (serial,company_id,moneey) values (#{serial},#{companyId},#{moneey})
+    </insert>
+
+    <update id="u1" parameterType="com.lyz.entities.Payment">
+        update payment
+        <!--<set>标签会自动处理前导逗号的问题，所以你不需要担心在条件语句中插入额外的逗号。-->
+        <set>
+        <if test=" serial != null">
+         serial=#{serial},
+        </if>
+            <if test="companyId!=null">
+         company_id=#{companyId},
+            </if>
+            <if test="moneey!=null">
+         moneey=#{moneey},
+            </if>
+        </set>
+          where id = #{id}
+    </update>
+
 
 </mapper>

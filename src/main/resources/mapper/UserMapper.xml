@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyz.dao.UserDao">
+    <!--nested exception is org.apache.ibatis.exceptions.TooManyResultsException:
+     Expected one result (or null) to be returned by selectOne(), but found: 2
+
+     报错就是因为我把 column(对应列名或者别名) property(类中的属性名) 搞错了
+     sql up.user_id userId1 是这样  <result  column="user_id" property="userId" jdbcType="BIGINT"/> 我搞成这样了
+     -->
+    <resultMap id="userMap" type="com.lyz.entities.UserData">
+        <id column="userId" property="userId" jdbcType="BIGINT"/>
+        <result  column="name" property="name" jdbcType="VARCHAR"/>
+        <result  column="age" property="age" jdbcType="INTEGER"/>
+        <result  column="sex" property="sex" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="userItemMap" type="com.lyz.entities.UserItem">
+        <id column="userId" property="userId" jdbcType="BIGINT"/>
+        <result  column="name" property="name" jdbcType="VARCHAR"/>
+        <result  column="age" property="age" jdbcType="INTEGER"/>
+        <result  column="sex" property="sex" jdbcType="VARCHAR"/>
+        <collection  property="userReportList"   ofType="com.lyz.entities.UserReport">
+            <result column="repoetId" property="repoetId" jdbcType="BIGINT"/>
+            <result  column="report" property="report" jdbcType="DECIMAL"/>
+            <result  column="date" property="date" jdbcType="TIMESTAMP"/>
+            <result  column="userId1" property="userId" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
+
+   <select id="selectUserItemById" parameterType="Long" resultMap="userItemMap">
+       SELECT
+	u.id userId,
+	u.`name`,
+	u.age,
+	u.sex,
+	up.id repoetId,
+	up.report,
+	up.date,
+	up.user_id userId1
+    FROM
+	`user` u
+	LEFT JOIN user_report up ON u.id = up.user_id
+    WHERE
+	u.id = #{id}
+    </select>
+
+    <select id="selectUser" parameterType="com.lyz.entities.UserTable" resultMap="userMap">
+        select id , name,age,sex from user
+        <where>
+            <if test="id !=null">
+               and id = #{id}
+            </if>
+            <if test="name !=null">
+               and name = #{name}
+            </if>
+            <if test="age !=null">
+                and age = #{age}
+            </if>
+            <if test="sex !=null">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertUser" parameterType="com.lyz.entities.UserTable">
+        insert into user (name,age,sex) values (#{name},#{age},#{sex})
+    </insert>
+    <update id="updateUser" parameterType="com.lyz.entities.UserTable">
+        update user set
+         <set>
+             <if test="id !=null">
+                  id = #{id}
+             </if>
+             <if test="name !=null">
+                 , name = #{name}
+             </if>
+             <if test="age !=null">
+                 , age = #{age}
+             </if>
+             <if test="sex !=null">
+                 , sex = #{sex}
+             </if>
+         </set>
+         where id#{id}
+    </update>
+</mapper>

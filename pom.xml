@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
+		<!--<version>2.2.2.RELEASE</version>-->
+		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lyz</groupId>
@@ -21,6 +22,7 @@
 
 
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -32,12 +34,12 @@
 			<version>1.1.10</version>
 		</dependency>
 
-		<!--kafka-->
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-			<version>2.3.4.RELEASE</version>
-		</dependency>
+		<!--kafka 修改 版本导致 启动报错-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.kafka</groupId>-->
+<!--			<artifactId>spring-kafka</artifactId>-->
+<!--			<version>2.3.4.RELEASE</version>-->
+<!--		</dependency>-->
 
 		<!--excel解析-->
 		<dependency>
@@ -89,7 +91,11 @@
 			<artifactId>jedis</artifactId>
 			<version>3.7.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.33.0</version>
+		</dependency>
 
 
 		<dependency>
@@ -144,6 +150,69 @@
 			<artifactId>bcprov-jdk15on</artifactId>
 			<version>1.69</version>
 		</dependency>
+
+		<!--sentinel 限流 熔断 代码形式-->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-core</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<!--sentinel 限流 熔断 注解的方式-->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-annotation-aspectj</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<!--sentinel 客户端需要引入Transport 模块来与 Sentinel 控制台进行通信。-->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-transport-simple-http</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+			<!--2021.1-->
+			<version>2021.0.1.0</version>
+		</dependency>
+		<!--自定义注解的依赖 springboot 默认应该是有的-->
+		<!-- Bean Validation API -->
+		<!--2.2.2.RELEASE 版本号 2.6.4 升级后需要的引用-->
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<!-- Hibernate Validator (实现) -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.7.Final</version>
+		</dependency>
+
+		<!--添加SLF4J依赖(日志)
+		SLF4J的多个版本都与Java 8兼容。特别是从SLF4J 1.7.x开始，就已经支持Java 8及更高版本
+		对于Java 8项目，推荐使用SLF4J 1.7.x系列中的较新版本，因为这些版本已经过长时间的验证，并且与Java 8兼容良好。
+		-->
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-api</artifactId>-->
+<!--			<version>1.7.36</version>-->
+<!--		</dependency>-->
+		<!--添加SLF4J 日志实现
+		ogback的多个版本都与Java 8兼容。特别是从Logback 1.2.x开始，就已经支持Java 8及更高版本。
+ 		Logback 1.3.x和1.4.x系列也支持Java 8，并且提供了更多的功能和改进。
+ 		然而，需要注意的是，这些版本可能与不同版本的SLF4J API兼容
+ 		（如Logback 1.3.x通常与SLF4J 1.7.x兼容，而Logback 1.4.x可能与SLF4J 2.0.x兼容）
+		-->
+<!--		<dependency>-->
+<!--			<groupId>ch.qos.logback</groupId>-->
+<!--			<artifactId>logback-classic</artifactId>-->
+<!--			<version>1.3.11</version>-->
+<!--		</dependency>-->
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

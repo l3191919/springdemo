@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * 事务失效
+ *
+ */
+
 @Service("shiwushixiao")
 public class Shiwushixiao implements ShiwushixiaoService{
     @Autowired

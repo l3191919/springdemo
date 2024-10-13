@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * iterator 使用
+ */
 public class IteratorService {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
