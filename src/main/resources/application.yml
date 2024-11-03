@@ -31,7 +31,7 @@ xxl:
   job:
     admin:
       # 调度中心服务部署的地址
-      addresses: http://127.0.0.1:8080/xxl-job-admin
+      addresses: http://192.168.207.128:8050/xxl-job-admin
     # 执行器通讯TOKEN,要和调度中心服务部署配置的accessToken一致，要不然无法连接注册
     accessToken: default_token
     executor:

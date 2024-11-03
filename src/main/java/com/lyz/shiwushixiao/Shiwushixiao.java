@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * 事务失效
- *
+ * 循环依赖解决
  */
 
 @Service("shiwushixiao")

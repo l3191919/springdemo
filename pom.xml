@@ -170,6 +170,13 @@
 			<version>1.8.1</version>
 		</dependency>
 
+		<!--Flowable的核心依赖-->
+		<dependency>
+			<groupId>org.flowable</groupId>
+			<artifactId>flowable-spring-boot-starter</artifactId>
+			<version>6.7.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
@@ -190,6 +197,19 @@
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.1.7.Final</version>
+		</dependency>
+
+		<!-- Apache POI for reading Word documents -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.3</version> <!-- 确保使用最新版本 -->
+		</dependency>
+		<!-- JavaMail API for sending emails -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version> <!-- 确保使用最新版本 -->
 		</dependency>
 
 		<!--添加SLF4J依赖(日志)

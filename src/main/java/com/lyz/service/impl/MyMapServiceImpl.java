@@ -72,10 +72,13 @@ public class MyMapServiceImpl {
         if(stringMap1.containsKey("李")){
             log.info(stringMap1.get("李"));
         }
+        Map<String,String> map = new HashMap<>();
+
         //找到相同的key
         for(Map.Entry<String,String> less:stringMap2.entrySet()){
             if(stringMap1.containsKey(less.getKey())){
                 log.info("for循环找到一样的 key: "+less.getKey()+" value: "+stringMap1.get(less.getKey()));
+                map.put(less.getKey(),less.getValue());
             }else{
                 log.info("for循环找到不一样的 key: "+less.getKey()+" value: "+stringMap1.get(less.getKey()));
             }
