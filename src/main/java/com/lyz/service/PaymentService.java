@@ -4,6 +4,8 @@ package com.lyz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lyz.entities.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +28,10 @@ public interface PaymentService {
     public Map <Object,Object> getRedisData1(String Rediskey,String HashKey);
 
     public List<Payment> selectById(Long id);
+    public void selectByIdExcel(HttpServletResponse response) throws IOException;
 
+    void excelDynamicExport(HttpServletResponse response) throws IOException;
     public PaymentItem selectPaymentItemById(Long id);
     public UserItem selectUserItemById(Long id);
+
 }

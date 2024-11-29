@@ -41,12 +41,7 @@
 <!--			<version>2.3.4.RELEASE</version>-->
 <!--		</dependency>-->
 
-		<!--excel解析-->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>easyexcel</artifactId>
-			<version>3.0.5</version>
-		</dependency>
+
 
 		<!--eureka client-->
 		<dependency>
@@ -198,20 +193,54 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.1.7.Final</version>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.alibaba</groupId>-->
+<!--			<artifactId>easyexcel</artifactId>-->
+<!--			<version>2.1.6</version>-->
+<!--		</dependency>-->
 
-		<!-- Apache POI for reading Word documents -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.3</version> <!-- 确保使用最新版本 -->
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.apache.poi</groupId>-->
+<!--			<artifactId>poi-ooxml</artifactId>-->
+<!--			<version>3.17</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.apache.poi</groupId>-->
+<!--			<artifactId>poi-ooxml-schemas</artifactId>-->
+<!--			<version>3.17</version>-->
+<!--		</dependency>-->
+		<!--xls(03)-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.poi</groupId>-->
+<!--			<artifactId>poi</artifactId>-->
+<!--			<version>3.9</version>-->
+<!--		</dependency>-->
+		<!--xlsx(07)-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.poi</groupId>-->
+<!--			<artifactId>poi-ooxml</artifactId>-->
+<!--			<version>3.9</version>-->
+<!--		</dependency>-->
+
+
 		<!-- JavaMail API for sending emails -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version> <!-- 确保使用最新版本 -->
 		</dependency>
-
+		<!--excel解析-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>easyexcel</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
 		<!--添加SLF4J依赖(日志)
 		SLF4J的多个版本都与Java 8兼容。特别是从SLF4J 1.7.x开始，就已经支持Java 8及更高版本
 		对于Java 8项目，推荐使用SLF4J 1.7.x系列中的较新版本，因为这些版本已经过长时间的验证，并且与Java 8兼容良好。

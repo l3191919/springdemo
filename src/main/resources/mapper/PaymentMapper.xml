@@ -14,7 +14,6 @@
             <result  column="company_code" property="companyCode" jdbcType="VARCHAR"/>
             <result  column="payment_id" property="paymentId" jdbcType="BIGINT"/>
         </collection>
-
     </resultMap>
 
 
@@ -26,7 +25,16 @@
     </resultMap>
 
 
-   <select id="selectPaymentItemById" parameterType="Long" resultMap="PaymentItemResultMap">
+    <resultMap id="PaymentResultMap" type="com.lyz.entities.Payment">
+        <id column="id" property="id"/>
+        <result  column="serial" property="serial"/>
+        <result  column="companyId" property="companyId"/>
+        <result  column="moneey" property="moneey" />
+    </resultMap>
+
+
+
+    <select id="selectPaymentItemById" parameterType="Long" resultMap="PaymentItemResultMap">
         select p.id paymentId1,
         p.serial ,
         p.company_id companyId1,
@@ -40,12 +48,11 @@
     </select>
 
 
-    <resultMap id="PaymentResultMap" type="com.lyz.entities.Payment">
-        <id column="id" property="paymentId" jdbcType="BIGINT"/>
-        <result  column="serial" property="serial" jdbcType="VARCHAR"/>
-        <result  column="company_id" property="companyId" jdbcType="BIGINT"/>
-        <result  column="moneey" property="moneey" jdbcType="DECIMAL"/>
-    </resultMap>
+
+    <select id="selectPaymentLimit" resultMap="PaymentResultMap">
+        SELECT id,serial,company_id AS  companyId,moneey FROM payment LIMIT 0,20
+    </select>
+
 
 
 

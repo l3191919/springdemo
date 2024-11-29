@@ -6,15 +6,20 @@ import com.alibaba.csp.sentinel.Tracer;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.fastjson.JSON;
 import com.lyz.entities.*;
 import com.lyz.service.PaymentService;
+import com.lyz.util.excel.DataListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +45,42 @@ public class PaymentController1 {
 //    public void sendMessage() {
 //        paymentService.sendMessage();
 //    }
+@PostMapping(value = "payment1/uploadExcel1", headers = "content-type=multipart/form-data")
+public List<Integer> uploadExcel1(MultipartFile file)throws Exception {
+    if (file == null) {
+        throw new RuntimeException("文件不能为空");
+    }
+    try {
+        //文件转成流的形式
+        InputStream inputStream = file.getInputStream();
+        //这两种都可以
+        //InputStream inputStream =this.getClass().getResourceAsStream("/static/aa.xlsx");
 
+
+        //new一个监听器  把service传进去
+        DataListener dataListener = new DataListener();
+        //使用这个的.read方法 参数为 文件 对应excel的实体类 new好的监听器
+        EasyExcel.read(inputStream, UserImportVO.class, dataListener)
+                .sheet(0) //指定读取第一个工作表
+                .headRowNumber(2)  //指定标题行在第2行
+                .doRead();  //执行实际的读取操作
+        log.info(JSON.toJSONString(dataListener.getDataList()));
+        //最后返回监听器里写好的获取读取失败行数的方法
+        return dataListener.getFailedRowIndexList();
+
+    } catch (IOException e) {
+        throw new RuntimeException();
+    }
+}
+
+
+
+    /**
+     * 导入
+     * @param file
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "payment1/uploadExcel", headers = "content-type=multipart/form-data")
     public CommonResult uploadExcel(MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename(); //获取文件名
@@ -132,6 +172,25 @@ public class PaymentController1 {
 
         CommonResult commonResult = new CommonResult();
         commonResult.setData(userData);
+        commonResult.setCode(400);
+        commonResult.setMessage("成功");
+        return commonResult;
+    }
+
+    @PostMapping(value = "payment1/selectByIdExcel")
+    public CommonResult selectByIdExcel(HttpServletResponse response) throws IOException {
+        paymentService.selectByIdExcel(response);
+
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(400);
+        commonResult.setMessage("成功");
+        return commonResult;
+    }
+    @PostMapping(value = "payment1/excelDynamicExport")
+    public CommonResult excelDynamicExport(HttpServletResponse response) throws IOException {
+        paymentService.excelDynamicExport(response);
+
+        CommonResult commonResult = new CommonResult();
         commonResult.setCode(400);
         commonResult.setMessage("成功");
         return commonResult;
@@ -230,6 +289,9 @@ public class PaymentController1 {
         commonResult.setMessage("成功");
         return commonResult;
     }
+
+
+
 
     //注意细节，一定要跟原函数的返回值和形参一致，并且形参最后要加个BlockException参数
     //否则会报错，FlowException: null

@@ -52,6 +52,7 @@ public interface PaymentDao {
 
     List<Payment> selectById(@Param("id") Long id);
 
+    List<Payment> selectPaymentLimit();
 
     PaymentItem selectPaymentItemById(@Param("id") Long id);
 }
